@@ -24,27 +24,43 @@
 [Youtube](https://bit.ly/ch8n-youtube) 
 
 
+## Contributing Guide
 
-# Contributing Guide
+It's so nice to see you here, please do follow these guidelines and thank you for your contribution! 🤩
 
-It's so nice to see you here, please do follow these guidelines and thank you for your contribution! 
-
-## How to contribute
+### How to contribute
 
 - Fork the project from the `master` branch and submit a Pull Request (PR)
 
   - Explain what the PR fixes or improves.
 
-  - If your PR aims to add a new resource to the list, provide the address of the resource.
+  - If your PR aims to add a new resource to the list, provide the `author/origin` of the resource, along with updated on `date`
   
-
-
 - Use sensible commit messages
 
   - If your PR fixes a separate issue number, include it in the commit message.
 
 
-
 - Use a sensible number of commit messages as well
 
   - e.g. Your PR should not have 1000s of commits.
+
+
+
+## :cop: License
+```
+   Copyright [2020] [Chetan gupta] [chetangupta.net]
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+ ```
+
