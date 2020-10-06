@@ -14,7 +14,7 @@
 
 
 ## :hand: About
-Hola Amigos! 🙌, Welcome to AndroidBites collections of Extensions, this is a place where I keep all of my faviourite kotlin extension, some are creation from my own and other are gathered from various sources. So this is the one point stop where I point my fellow android devs 👩‍💻 to get some quality extensions. 
+Hola Amigos! 🙌, Welcome to AndroidBites collection, this repo is a place where I keep all of my faviourite kotlin extension, some are creation of my own and other are gathered from various sources. So this is the one point stop where I point my fellow android devs 👩‍💻 to get some quality extensions. 
 
 Btw do checkout my website 👉 [AndroidBites](https://chetangupta.net), I share all my stuff there, my learnings, my snippets, my research all are here. I believe in sharing so if you like to share too your always invited to contribute! 🤩
 
@@ -38,7 +38,7 @@ Chao!
 
 
 ## :memo: Contribution
-Do checkout if you wanna add to action, 👉  [contributing.md](contribution.md)
+Do checkout if you wanna add to action, 👉  [Contribution Guide](./contribution.md)
 
 
 ## :book: Content
