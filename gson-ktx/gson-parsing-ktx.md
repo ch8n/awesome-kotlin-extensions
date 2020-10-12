@@ -27,8 +27,8 @@
 ## :memo: Contribution
 See [contributing.md](contribution.md)
 
-## Android View's Visibility KTX
-Useful extension for updating visibility of your views
+## Gson Parsing KTX
+Useful extension for parsing GSONString to Object and vice-versa
 
 ### :book: Content
 * [Convert Object class to JSONString](#ObjectToJSONStringConversion)
@@ -39,7 +39,7 @@ Useful extension for updating visibility of your views
 ```kotlin
 /**
 *  [Author] : Ashok 
-*  [Updated on] : 11/10/2020
+*  [Updated on] : 12/10/2020
 **/
 fun Any.toJson(): String? {
     try {
@@ -52,11 +52,10 @@ fun Any.toJson(): String? {
 #### Usage
 ```kotlin
 //test class used for demonstration
- data class TestObject(val name: String?,
-                     val rollNo: Int?)
+data class TestObject(val name: String?,val rollNo: Int?)
 
-        val testObject = TestObject("Ashok", 922)
-        val json = testObject.toJson()
+val testObject = TestObject("Ashok", 922)
+val json = testObject.toJson()
 ```
 ---
 
@@ -64,31 +63,29 @@ fun Any.toJson(): String? {
 ```kotlin
 /**
 *  [Author] : Ashok 
-*  [Updated on] : 11/10/2020
+*  [Updated on] : 12/10/2020
 * Below method uses generics and can convert JSONString
 * to Any type of object depending on the type provided]
 **/
 fun <T> String.fromJson(type: Type): T? {
-        if (this.isEmpty()) {
-            return null
-        }
-        try {
-            return gson.fromJson<T>(this, type)
-        } catch (exception: Exception) {
-        }
-
+    if (this.isEmpty()) {
         return null
     }
+    try {
+        return gson.fromJson<T>(this, type)
+    } catch (exception: Exception) {
+    }
+
+    return null
+}
 ```
 #### Usage
 ```kotlin
 //test class used for demonstration
-data class TestObject(val name: String?,
-                      val rollNo: Int?)
+data class TestObject(val name: String?,val rollNo: Int?)
 
-
-        val json= "{\"name\":\"Ashok\",\"rollNo\":922}"
-        val testObject: TestObject? = json.fromJson<TestObject>(TestObject::class.java)
+val json= "{\"name\":\"Ashok\",\"rollNo\":922}"
+val testObject: TestObject? = json.fromJson<TestObject>(TestObject::class.java)
 ```
 
 ## :cop: License
