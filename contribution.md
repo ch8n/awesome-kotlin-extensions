@@ -29,6 +29,9 @@
 It's so nice to see you here, please do follow these guidelines and thank you for your contribution! 🤩
 
 ### How to contribute
+- Please open a issue first so that it's in notice of maintainers that your working on a feature/issue
+
+- Have a healthy discussion about your approach/strategy/question before you start you task, 
 
 - Fork the project from the `master` branch and submit a Pull Request (PR)
 
@@ -40,6 +43,7 @@ It's so nice to see you here, please do follow these guidelines and thank you fo
 
 - Your PR should not have 1000s of commits.
 
+- be respectful/humble or you would be displayed on `Wall of Shame 🐴`
 
 
 ## :cop: License
