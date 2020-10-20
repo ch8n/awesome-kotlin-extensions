@@ -27,13 +27,74 @@
 ## :memo: Contribution
 See [contributing.md](contribution.md)
 
+## Android Click KTX
+Useful extension for click behaviour for your views
 
-## Android View KTX
-Collection of Extension realted to Android Views
+### :book: Content
+* [Debounce click listener](#debounce)
+* [Double click listener](#double)
 
-## :book: Content
-* [View-Visibility-KTX](./view-visibility-ktx.md)
-* [View-Click-KTX](./view-click-ktx.md)
+---
+
+### <a name="debounce"/> Debounce click listener
+Useful to debounce/throttle mutiple click on a view.
+```kotlin
+/**
+*  [Submitted by] : Chetan Gupta 
+*  [Updated on] : 21/9/2020
+**/
+inline fun View.onDebounceClick(debounceInMillis: Long = 1200L, crossinline action: () -> Unit) {
+    this.setOnClickListener(object : View.OnClickListener {
+        private var lastClickTime: Long = 0
+        override fun onClick(v: View) {
+            if (SystemClock.elapsedRealtime() - lastClickTime < debounceTime) return
+            else action()
+            lastClickTime = SystemClock.elapsedRealtime()
+        }
+    })
+}
+```
+#### Usage
+```kotlin
+button.onDebounceClick(debounceInMillis = 1500L){
+    // do stuff..
+}
+```
+---
+
+### <a name="double"/> Double click listener
+Useful to simulate double click on a view in a specificed time interval
+```kotlin
+/**
+*  [Submitted by] : Chetan Gupta 
+*  [Updated on] : 21/9/2020
+**/
+inline fun View.onDoubleClick(intervalMillis: Long = 1500L, crossinline action: () -> Unit) {
+    var count = 0
+    var firstClickRecord: Long = 0
+    var secondClickRecord: Long = 0
+    this.setOnClickListener {
+        count += 1
+        when (count) {
+            1 -> firstClickRecord = Calendar.getInstance().timeInMillis
+            2 -> {
+                secondClickRecord = Calendar.getInstance().timeInMillis
+                if (abs(firstClickRecord - secondClickRecord) < interval) {
+                    action()
+                }
+                count = 0
+            }
+        }
+    }
+}
+
+```
+#### Usage
+```kotlin
+button.onDoubleClick(intervalMillis = 1200L){
+    // do stuff..
+}
+```
 
 ## :cop: License
 ```
@@ -51,4 +112,5 @@ Collection of Extension realted to Android Views
    limitations under the License.
 
  ```
+
 
