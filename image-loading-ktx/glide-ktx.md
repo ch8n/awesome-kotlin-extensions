@@ -32,9 +32,7 @@ Useful extension for image loading using Glide
 
 ### :book: Content
 * [Load Image using Glide](#ImageLoadingGlide)
-* [Load Image using Glide with placeholder](#ImageLoadingGlidePlaceholder)
-* [Load Circular Image using Glide ](#CircularImageLoadingGlide)
-* [Load Circular Image using Glide with Placeholder ](#CircularImageLoadingGlidePlaceholder)
+* [Load Image using Glide with options](#ImageLoadingGlideWithOptions)
 
 ---
 
@@ -42,76 +40,120 @@ Useful extension for image loading using Glide
 ```kotlin
 /**
 *  [Submitted by] : Inderpreet Singh 
-*  [Updated on] : 14/10/2020
-*  Load image using Glide 
+*  [Updated on] : 21/10/2020
+* Load Image using glide.
+*
+* If a placeholder resource is applied it will be shown else nothing is displayed for
+* placeholder
 **/
-fun ImageView.loadImage(context: Context, url: String) {
-    GlideApp.with(context).load(url).into(this)
+
+fun ImageView.loadImage(url: String, @DrawableRes placeHolder: Int = -1) {
+    Glide.with(context)
+        .load(url)
+        .apply { if (placeHolder != -1) this.placeholder(placeHolder) }
+        .into(this)
 }
 ```
 #### Usage
 ```kotlin
 //sample usage
-imageView.loadImage(this@MyActivity,imageUrl)
+imageView.loadImage(imageUrl,R.id.placeHolder)
 ```
 ---
 
-### <a name="ImageLoadingGlidePlaceholder"/> Load Image using Glide with placeholder
+### <a name="ImageLoadingGlideWithOptions"/> Load Image using Glide with different options
 ```kotlin
 /**
 *  [Submitted by] : Inderpreet Singh 
-*  [Updated on] : 14/10/2020
+*  [Updated on] : 21/10/2020
 **/
-fun ImageView.loadImageWithPlaceholder(context: Context, url: String, placeHolderId: Int) {
-    GlideApp.with(context).load(url).placeholder(placeHolderId).into(this)
+
+//Data class for different glide options
+data class GlideImageOptions(
+    @DrawableRes val errorHolder: Int,
+    @DrawableRes val placeholder: Int? = null,
+    val scaleType: GlideScaleType = GlideScaleType.Default,
+    val isCircular: Boolean = false,
+    val cache: GlideCache = GlideCache.Default
+)
+
+sealed class GlideScaleType {
+    object Default : GlideScaleType()
+    object CenterCrop : GlideScaleType()
+    object FitCenter : GlideScaleType()
+    object CenterInside : GlideScaleType()
+    data class Custom(val height: Int, val width: Int) : GlideScaleType()
+    data class CustomDimen(@DimenRes val height: Int, @DimenRes val width: Int) : GlideScaleType()
+}
+
+enum class GlideCache {
+    Default,
+    All,
+    Data,
+    None,
+    Resource,
+    Automatic
+}
+
+fun ImageView.loadImageWithOptions(url: String?, options: GlideImageOptions) {
+    Glide.with(context)
+        .load(url)
+        .apply {
+            when (options.scaleType) {
+                is GlideScaleType.Default -> {
+                    //do nothing
+                }
+                is GlideScaleType.CenterCrop -> this.centerCrop()
+                is GlideScaleType.FitCenter -> this.fitCenter()
+                is GlideScaleType.CenterInside -> this.centerInside()
+                is GlideScaleType.Custom -> with(options.scaleType) {
+                    val (height, width) = this@with
+                    this@apply.override(height, width)
+                }
+                is GlideScaleType.CustomDimen -> with(options.scaleType) {
+                    val (height, width) = this
+                    this@apply.override(height, width)
+                }
+            }
+
+            when (options.cache) {
+                GlideCache.Default -> {
+                    //do nothing
+                }
+                GlideCache.All -> {
+                    this.diskCacheStrategy(DiskCacheStrategy.ALL)
+                }
+                GlideCache.Automatic -> {
+                    this.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                }
+                GlideCache.None -> {
+                    this.diskCacheStrategy(DiskCacheStrategy.NONE)
+                }
+                GlideCache.Data -> {
+                    this.diskCacheStrategy(DiskCacheStrategy.DATA)
+                }
+
+                GlideCache.Resource -> {
+                    this.diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                }
+            }
+            this.error(options.errorHolder)
+            if (options.placeholder != null) {
+                this.placeholder(options.placeholder)
+            }
+
+            if (options.isCircular) {
+                this.circleCrop()
+            }
+        }.into(this)
+
 }
 ```
 #### Usage
 ```kotlin
 //sample usage
-imageView.loadImageWithPlaceholder(this@MyActivity,imageUrl,R.drawable.ic_placeholder)
-```
----
+imageView.loadImageWithOptions(imageUrl, GlideImageOptions(errorHolder = R.mipmap.ic_launcher,isCircular = true,scaleType = GlideScaleType.FitCenter))
 
-### <a name="CircularImageLoadingGlide"/> Load Circular Image using Glide
-```kotlin
-/**
-*  [Submitted by] : Inderpreet Singh 
-*  [Updated on] : 14/10/2020
-**/
-fun ImageView.loadCircularImage(context: Context, url: String) {
-    GlideApp.with(context)
-			.load(url)
-			.circleCrop()
-            .into(this)
-}
-
-```
-#### Usage
-```kotlin
-//sample usage
-imageView.loadCircularImage(this@MyActivity,imageUrl)
-```
----
-
-
-### <a name="CircularImageLoadingGlidePlaceholder"/> Load Circular Image using Glide with Placeholder
-```kotlin
-/**
-*  [Submitted by] : Inderpreet Singh 
-*  [Updated on] : 14/10/2020
-**/
-fun ImageView.loadCircularImageWithPlaceholder(context: Context, url: String, placeHolderId: Int) {
-    GlideApp.with(context).load(url).circleCrop()
-            .placeholder(placeHolderId)
-            .into(this)
-}
-
-```
-#### Usage
-```kotlin
-//sample usage
-imageView.loadCircularImageWithPlaceholder(this@MyActivity,imageUrl,R.drawable.ic_placeholder)
 ```
 ---
 

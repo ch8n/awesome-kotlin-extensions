@@ -28,11 +28,11 @@
 See [contributing.md](contribution.md)
 
 
-## Glide Image Loading KTX
-Collection of Extension related to Image loading using Glide
+## Image Loading KTX
+Collection of Extension related to Image loading
 
 ## :book: Content
-* [IMAGE-LOADING-GLIDE-KTX](./glide-ktx.md)
+* [GLIDE-KTX](./glide-ktx.md)
 
 
 ## :cop: License
