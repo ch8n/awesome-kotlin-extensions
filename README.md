@@ -26,7 +26,7 @@ Chao!
 
 ## :eyes: Social
 [LinkedIn](https://bit.ly/ch8n-linkdIn) | 
-[Medium](https://bit.ly/ch8n-medium) | 
+[Medium](https://bit.ly/ch8n-medium-blog) | 
 [Twitter](https://bit.ly/ch8n-twitter) | 
 [StackOverflow](https://bit.ly/ch8n-stackOflow) | 
 [CodeWars](https://bit.ly/ch8n-codewar) |
