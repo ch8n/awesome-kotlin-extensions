@@ -1,4 +1,4 @@
-<h1 align="center">Awesome Android Extensions - <a href="https://chetangupta.net" target="_blank">AndroidBites</a>
+<h1 align="center">Awesome Android Extensions and DSLs- <a href="https://chetangupta.net" target="_blank">AndroidBites</a>
 </h1>
     
 ![awesome-android-extension-androidbites](./androidbites_awesome_extension.jpg)
